@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onAddComment(f)" #f="ngForm">
+      <div class="col-sm-5">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            autocomplete="false"
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            ngModel
+            required
+            email
+            #email="ngModel"
+          >
+          <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+        </div>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            autocomplete="false"
+            type="text"
+            id="title"
+            class="form-control"
+            name="title"
+            ngModel
+            required
+            #title="ngModel"
+          >
+          <span class="help-block" *ngIf="!title.valid && title.touched">Please enter a title!</span>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="form-group ">
+          <label for="comment">Comment</label>
+          <textarea
+            autocomplete="false"
+            name="comment"
+            id="comment"
+            rows="4"
+            class="form-control"
+            ngModel
+            required
+            #comment="ngModel"
+          ></textarea>
+          <span class="help-block" *ngIf="!comment.valid && comment.touched">Please enter a comment!</span>
+        </div>
+      </div>
+      <div class="form-group col-sm-10">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="!f.valid"
+        >Add Comment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

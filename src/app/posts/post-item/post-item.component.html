@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><h4 class="panel-title"><b>{{post.title}}</b></h4></div>
+  <div class="panel-body">{{post.body}}</div>
+  <div><span class="pull-right">
+      <a style="cursor: pointer;" (click)="onAddComment()">Add comment</a>
+      <a style="cursor: pointer;" (click)="onListComment()">Show/Hide comment</a>
+    </span></div>
+</div>
+<app-comments
+  class="panel-group"
+  *ngIf="visibleComment"
+  [postId]="post.id"
+></app-comments>
+<app-add-comment
+  *ngIf="visibleAddComment"
+  [postId]="post.id"
+></app-add-comment>
+<br>

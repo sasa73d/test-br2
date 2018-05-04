@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <input type="text"
+           class="form-control "
+           placeholder="serach ..."
+           [(ngModel)]="term">
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-post-item
+      *ngFor="let postEl of posts | search: term | paginate: { itemsPerPage: 6, currentPage: p }"
+      [post]="postEl"
+    ></app-post-item>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>

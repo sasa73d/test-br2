@@ -1,0 +1,214 @@
+<div class="row" *ngIf="redirectTo(user)">
+  <div class="col-md-12 panel panel-success">
+    <form (ngSubmit)="onAddUser(f)" #f="ngForm">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="username">username</label>
+          <input
+            autofocus
+            placeholder="username  *"
+            type="text"
+            id="username"
+            class="form-control"
+            name="username"
+            ngModel
+            #username="ngModel"
+            [ngModel]="editMode ? user.username : ''"
+            required
+          >
+          <span class="help-block" *ngIf="!username.valid && username.touched">Please enter a valid username!</span>
+        </div>
+        <div class="form-group">
+          <label for="name">name</label>
+          <input
+            placeholder="name  *"
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            required
+            ngModel
+            #name="ngModel"
+            [ngModel]="editMode ? user.name : ''"
+          >
+          <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid name!</span>
+        </div>
+        <div class="form-group">
+          <label for="email">email</label>
+          <input
+            placeholder="email  *"
+            type="text"
+            id="email"
+            class="form-control"
+            name="email"
+            email
+            required
+            ngModel
+            #email="ngModel"
+            [ngModel]="editMode ? user.email : ''"
+          >
+          <span class="help-block" *ngIf="!email.valid && email.valid">Please enter a valid email!</span>
+        </div>
+        <div class="form-group">
+          <label for="phone">phone</label>
+          <input
+            placeholder="phone  *"
+            type="text"
+            id="phone"
+            class="form-control"
+            name="phone"
+            required
+            ngModel
+            #phone="ngModel"
+            [ngModel]="editMode ? user.phone : ''"
+          >
+          <span class="help-block" *ngIf="!phone.valid && phone.touched">Please enter a valid name!</span>
+        </div>
+        <div class="form-group">
+          <label for="company_name">company</label>
+          <input
+            placeholder="company name  *"
+            type="text"
+            id="company_name"
+            class="form-control"
+            name="company_name"
+            required
+            ngModel
+            #company_name="ngModel"
+            [ngModel]="editMode ? user.company.name : ''"
+          >
+          <span class="help-block" *ngIf="!company_name.valid && company_name.touched">Please enter a valid company name!</span>
+        </div>
+        <div class="form-group">
+          <input
+            placeholder="catch Phrase"
+            type="text"
+            id="catch_phrase"
+            class="form-control"
+            name="catch_phrase"
+            ngModel
+            #catch_phrase="ngModel"
+            [ngModel]="editMode ? user.company.catchPhrase : ''"
+          >
+        </div>
+        <div class="form-group">
+          <input
+            placeholder="bs"
+            type="text"
+            id="bs"
+            class="form-control"
+            name="bs"
+            ngModel
+            #bs="ngModel"
+            [ngModel]="editMode ? user.company.bs : ''"
+          >
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="website">website</label>
+          <input
+            placeholder="website  *"
+            type="text"
+            id="website"
+            class="form-control"
+            name="website"
+            required
+            ngModel
+            #website="ngModel"
+            [ngModel]="editMode ? user.website : ''"
+          >
+          <span class="help-block" *ngIf="!website.valid && website.touched">Please enter a valid website!</span>
+        </div>
+        <div class="form-group">
+          <label for="street">address</label>
+          <input
+            placeholder="street  *"
+            type="text"
+            id="street"
+            class="form-control"
+            name="street"
+            required
+            ngModel
+            #street="ngModel"
+            [ngModel]="editMode ? user.address.street : ''"
+          >
+          <span class="help-block" *ngIf="!street.valid && street.touched">Please enter a valid street!</span>
+        </div>
+        <div class="form-group">
+          <input
+            placeholder="suite"
+            type="text"
+            id="suite"
+            class="form-control"
+            name="suite"
+            ngModel
+            #suite="ngModel"
+            [ngModel]="editMode ? user.address.suite : ''"
+          >
+        </div>
+        <div class="form-group">
+          <input
+            placeholder="city  *"
+            type="text"
+            id="city"
+            class="form-control"
+            name="city"
+            required
+            ngModel
+            #city="ngModel"
+            [ngModel]="editMode ? user.address.city : ''"
+          >
+          <span class="help-block" *ngIf="!city.valid && city.touched">Please enter a valid city!</span>
+        </div>
+        <div class="form-group">
+          <input
+            placeholder="zipcode  *"
+            type="text"
+            id="zipcode"
+            class="form-control"
+            name="zipcode"
+            required
+            ngModel
+            #zipcode="ngModel"
+            [ngModel]="editMode ? user.address.zipcode : ''"
+          >
+          <span class="help-block" *ngIf="!zipcode.valid && zipcode.touched">Please enter a valid zip-code!</span>
+        </div>
+        <div class="form-group col-xs-8">
+          <input
+            placeholder="geo-lat"
+            type="text"
+            id="geo_lat"
+            class="form-control"
+            name="geo_lat"
+            ngModel
+            #geo_lat="ngModel"
+            [ngModel]="editMode ? user.address.geo.lat : ''"
+          >
+          <input
+            placeholder="geo-lgn"
+            type="text"
+            id="geo_lgn"
+            class="form-control"
+            name="geo_lgn"
+            ngModel
+            #geo_lgn="ngModel"
+            [ngModel]="editMode ? user.address.geo.lng : ''"
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit"
+                  class="btn btn-success"
+                  [disabled]="!f.valid"
+          >{{editMode ? 'Update': 'Save'}}</button>
+          <button type="button" class="btn btn-info">Reset</button>
+        </div>
+      </div>
+      <br>
+    </form>
+  </div>
+</div>
+

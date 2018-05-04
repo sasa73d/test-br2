@@ -1,0 +1,28 @@
+<div class="list-group-item clearfix"
+     style="cursor: pointer"
+     (click)="onClickPhoto()"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ photo.title }}</h4>
+  </div>
+  <span class="pull-right">
+    <img
+      [src]="photo.thumbnailUrl"
+      alt="{{ photo.id }}"
+      class="img-responsive"
+      style="max-height: 50px;">
+  </span>
+</div>
+
+<div class="row" *ngIf="visiblePhoto">
+  <div class="col-xs-12">
+    <br>
+    <img
+      [src]="photo.url"
+      alt="{{ photo.id }}"
+      class="img-responsive center-block"
+      style="max-height: 300px;">
+    <br>
+  </div>
+</div>
+

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-xs-8">
+    <input
+      placeholder="Search..."
+      type="text"
+      id="search"
+      class="form-control"
+      name="search"
+      [(ngModel)]="term">
+  </div>
+  <div class="col-xs-4">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="onNewUser()"
+    >New</button>
+  </div>
+  <hr>
+  <div class="col-xs-12">
+    <app-user-item
+      class="panel-group"
+      *ngFor="let userEl of users
+          | search: term
+          | paginate: { itemsPerPage: 6, currentPage: p};
+          let i = index "
+      [user]="userEl"
+      [index]="i"
+    ></app-user-item>
+    <br>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</div>
