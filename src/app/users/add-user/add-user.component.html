@@ -1,4 +1,7 @@
 <div class="row" *ngIf="redirectTo(user)">
+  <div *ngIf="errorMessage" class="col-md-12">
+    <span class="help-block"><h3>{{errorMessage}}</h3></span>
+  </div>
   <div class="col-md-12 panel panel-success">
     <form (ngSubmit)="onAddUser(f)" #f="ngForm">
       <div class="col-sm-6">
@@ -11,12 +14,20 @@
             id="username"
             class="form-control"
             name="username"
+            minlength="4"
             ngModel
             #username="ngModel"
             [ngModel]="editMode ? user.username : ''"
             required
           >
-          <span class="help-block" *ngIf="!username.valid && username.touched">Please enter a valid username!</span>
+          <div *ngIf="!username.valid && username.touched">
+            <span class="help-block"
+                  *ngIf="username.hasError('required')"
+            >Username is required!</span>
+            <span class="help-block"
+                  *ngIf="username.hasError('minlength')"
+            >Username must be at least 4 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <label for="name">name</label>
@@ -27,11 +38,19 @@
             class="form-control"
             name="name"
             required
+            minlength="4"
             ngModel
             #name="ngModel"
             [ngModel]="editMode ? user.name : ''"
           >
-          <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a valid name!</span>
+          <div *ngIf="!name.valid && name.touched">
+            <span class="help-block"
+                  *ngIf="name.hasError('required')"
+            >Name is required!</span>
+            <span class="help-block"
+                  *ngIf="name.hasError('minlength')"
+            >Name must be at least 4 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <label for="email">email</label>
@@ -47,7 +66,14 @@
             #email="ngModel"
             [ngModel]="editMode ? user.email : ''"
           >
-          <span class="help-block" *ngIf="!email.valid && email.valid">Please enter a valid email!</span>
+          <div *ngIf="!email.valid && email.touched">
+            <!--<span class="help-block"
+                  *ngIf="email.hasError('required')"
+            >Email is required!</span>-->
+            <span class="help-block"
+                  *ngIf="email.hasError('email')"
+            >Please enter a valid email!</span>
+          </div>
         </div>
         <div class="form-group">
           <label for="phone">phone</label>
@@ -58,11 +84,19 @@
             class="form-control"
             name="phone"
             required
+            minlength="6"
             ngModel
             #phone="ngModel"
             [ngModel]="editMode ? user.phone : ''"
           >
-          <span class="help-block" *ngIf="!phone.valid && phone.touched">Please enter a valid name!</span>
+          <div *ngIf="!phone.valid && phone.touched">
+            <span class="help-block"
+                  *ngIf="phone.hasError('required')"
+            >Phone is required!</span>
+            <span class="help-block"
+                  *ngIf="phone.hasError('minlength')"
+            >Phone number must be at least 6 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <label for="company_name">company</label>
@@ -73,11 +107,19 @@
             class="form-control"
             name="company_name"
             required
+            minlength="4"
             ngModel
             #company_name="ngModel"
             [ngModel]="editMode ? user.company.name : ''"
           >
-          <span class="help-block" *ngIf="!company_name.valid && company_name.touched">Please enter a valid company name!</span>
+          <div *ngIf="!company_name.valid && company_name.touched">
+            <span class="help-block"
+                  *ngIf="company_name.hasError('required')"
+            >Company name is required!</span>
+            <span class="help-block"
+                  *ngIf="company_name.hasError('minlength')"
+            >Company name must be at least 4 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <input
@@ -115,10 +157,18 @@
             name="website"
             required
             ngModel
+            minlength="6"
             #website="ngModel"
             [ngModel]="editMode ? user.website : ''"
           >
-          <span class="help-block" *ngIf="!website.valid && website.touched">Please enter a valid website!</span>
+          <div *ngIf="!website.valid && website.touched">
+            <span class="help-block"
+                  *ngIf="website.hasError('required')"
+            >Website is required!</span>
+            <span class="help-block"
+                  *ngIf="website.hasError('minlength')"
+            >Website must be at least 6 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <label for="street">address</label>
@@ -128,12 +178,20 @@
             id="street"
             class="form-control"
             name="street"
+            minlength="4"
             required
             ngModel
             #street="ngModel"
             [ngModel]="editMode ? user.address.street : ''"
           >
-          <span class="help-block" *ngIf="!street.valid && street.touched">Please enter a valid street!</span>
+          <div *ngIf="!street.valid && street.touched">
+            <span class="help-block"
+                  *ngIf="street.hasError('required')"
+            >Street is required!</span>
+            <span class="help-block"
+                  *ngIf="street.hasError('minlength')"
+            >Street must be at least 4 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <input
@@ -155,11 +213,19 @@
             class="form-control"
             name="city"
             required
+            minlength="3"
             ngModel
             #city="ngModel"
             [ngModel]="editMode ? user.address.city : ''"
           >
-          <span class="help-block" *ngIf="!city.valid && city.touched">Please enter a valid city!</span>
+          <div *ngIf="!city.valid && city.touched">
+            <span class="help-block"
+                  *ngIf="city.hasError('required')"
+            >City is required!</span>
+            <span class="help-block"
+                  *ngIf="city.hasError('minlength')"
+            >City must be at least 4 characters long!</span>
+          </div>
         </div>
         <div class="form-group">
           <input
@@ -169,11 +235,21 @@
             class="form-control"
             name="zipcode"
             required
+            minlength="4"
+            maxlength="14"
             ngModel
             #zipcode="ngModel"
             [ngModel]="editMode ? user.address.zipcode : ''"
           >
-          <span class="help-block" *ngIf="!zipcode.valid && zipcode.touched">Please enter a valid zip-code!</span>
+          <div *ngIf="!zipcode.valid && zipcode.touched">
+            <span class="help-block"
+                  *ngIf="zipcode.hasError('required')"
+            >Zip-code is required!</span>
+            <span class="help-block"
+                  *ngIf="zipcode.hasError('minlength') ||
+                         zipcode.hasError('maxlength')"
+            >Zip-code must be between 4 and 14 characters long!</span>
+          </div>
         </div>
         <div class="form-group col-xs-8">
           <input
@@ -197,6 +273,44 @@
             [ngModel]="editMode ? user.address.geo.lng : ''"
           >
         </div>
+        <div class="form-group col-xs-12">
+          <label for="password">password</label>
+          <input
+            placeholder="password *"
+            type="password"
+            id="password"
+            class="form-control"
+            name="password"
+            required
+            minlength="4"
+            validateEqual="retype_password"
+            reverse="true"
+            ngModel
+            #password="ngModel"
+            [ngModel]="editMode ? user.password : ''"
+          >
+          <div *ngIf="!password.valid && password.touched">
+            <span class="help-block"
+                  *ngIf="!password.hasError('minlength')">Password must have at least 4 characters!</span>
+          </div>
+          <input
+            placeholder="retype password *"
+            type="password"
+            id="retype_password"
+            class="form-control"
+            name="retype_password"
+            ngModel
+            validateEqual="password"
+            reverse="false"
+            required
+            #retype_password="ngModel"
+            [ngModel]="editMode ? user.password : ''"
+          >
+          <div *ngIf="!retype_password.valid && retype_password.touched">
+            <span class="help-block"
+                  *ngIf="!retype_password.hasError('validateEqual')">Passwords must match!</span>
+          </div>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -204,7 +318,7 @@
                   class="btn btn-success"
                   [disabled]="!f.valid"
           >{{editMode ? 'Update': 'Save'}}</button>
-          <button type="button" class="btn btn-info">Reset</button>
+          <button type="button" class="btn btn-info" (click)="onReset()">Reset</button>
         </div>
       </div>
       <br>

@@ -14,9 +14,9 @@ import {ActivatedRoute, Params} from '@angular/router';
 export class PhotosListComponent implements OnInit {
   photos: Photo[];
   album: Album;
-  index: number;
+  id: number;
   term: string;
-  p = 1;
+  i = 1;
 
   constructor(private photosService: PhotosService,
               private dataService: DataAccessService,
@@ -27,8 +27,8 @@ export class PhotosListComponent implements OnInit {
     this.route.params
       .subscribe(
         (params: Params) => {
-          this.index = +params['id'];
-          this.album = this.albumService.getAlbumByIndex(this.index);
+          this.id = +params['id'];
+          this.album = this.albumService.getAlbumByById(this.id);
           this.dataService.getPhotosByAlbumId(this.album.id);
           this.photosService.photosChange
             .subscribe(

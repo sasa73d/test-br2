@@ -1,0 +1,19 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a routerLink=" " class="navbar-brand">User: {{getUsername()}}</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown" appDropdown>
+        <a class="dropdown-toggle" role="button">Select <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="edit-posts">Edit posts</a></li>
+          <li><a routerLink="edit-albums">Edit albums</a></li>
+          <li><a routerLink="edit-user">Edit user data</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+

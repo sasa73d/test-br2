@@ -4,14 +4,15 @@ import {UsersComponent} from './users.component';
 import {BlankUserComponent} from './blank-user/blank-user.component';
 import {ViewUserComponent} from './view-user/view-user.component';
 import {AddUserComponent} from './add-user/add-user.component';
+import {AuthGuardService} from '../auth/auth-guard.service';
 
 const usersRoutes: Routes = [
-  { path: 'users', component: UsersComponent, children: [
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuardService], children: [
       {path: '', component: BlankUserComponent},
-      {path: 'new', component: AddUserComponent},
       {path: ':id', component: ViewUserComponent},
       {path: ':id/edit', component: AddUserComponent}
-    ]}
+    ]},
+  { path: 'signup', component: AddUserComponent}
 ]
 
 @NgModule({

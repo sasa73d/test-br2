@@ -20,11 +20,10 @@
       class="panel-group"
       *ngFor="let albumEl of albums
        | search: term
-       | paginate: { itemsPerPage: 9, currentPage: p}; let i = index "
+       | paginate: { itemsPerPage: 9, currentPage: p, id: 'p'};"
       [album]="albumEl"
-      [index]="i"
     ></app-album-item>
     <br>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" id="p"></pagination-controls>
   </div>
 </div>

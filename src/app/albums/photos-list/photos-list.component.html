@@ -19,10 +19,10 @@
     <app-photo-item
       *ngFor="let photoEl of photos
       | search: term
-      | paginate: { itemsPerPage: 10, currentPage: p }"
+      | paginate: { itemsPerPage: 10, currentPage: i, id:'i' }"
       [photo]="photoEl"
     ></app-photo-item>
     <br>
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    <pagination-controls (pageChange)="i = $event" id="i"></pagination-controls>
   </div>
 </div>

@@ -1,12 +1,18 @@
 import {NgModule} from '@angular/core';
 import {SearchPipe} from './search.pipe';
+import {EqualValidator} from './equal-validator.directive';
+import {DropdownDirective} from './dropdown.directive';
 
 @NgModule({
   declarations: [
-    SearchPipe
+    SearchPipe,
+    EqualValidator,
+    DropdownDirective
   ],
   exports: [
-    SearchPipe
+    SearchPipe,
+    EqualValidator,
+    DropdownDirective
   ]
 })
 export class ShareModule {}

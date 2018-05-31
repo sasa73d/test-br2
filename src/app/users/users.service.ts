@@ -4,7 +4,7 @@ import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class UsersService {
-  users: User[];
+  users: User[] = new Array<User>();
   usersChange = new Subject<User[]>()
 
   constructor() {}
@@ -14,12 +14,31 @@ export class UsersService {
     this.usersChange.next(this.users);
   }
 
-  getUserByIndex(index: number) {
-    return this.users[index];
+  getUserById(id: number) {
+    return this.users.find(x => x.id === id);
   }
 
   addUser(user: User) {
     this.users.push(user);
+  }
+
+  editUser(editUser: User) {
+    for (let user of this.users) {
+      if (user.id === editUser.id) {
+        user = editUser;
+      }
+    }
+  }
+
+  deleteUser(id: number) {
+    const tempUsers = new Array<User>();
+    for (let user of this.users) {
+      if (user.id !== id) {
+        tempUsers.push(user);
+      }
+    }
+    this.users = tempUsers;
+    this.usersChange.next(this.users);
   }
 
 }

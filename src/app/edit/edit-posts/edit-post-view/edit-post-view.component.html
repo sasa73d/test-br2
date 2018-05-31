@@ -1,0 +1,43 @@
+<br>
+<div class="panel panel-default">
+  <div class="panel-heading"><h4 class="panel-title"><b>{{post.title}}</b></h4></div>
+  <div class="panel-body">{{post.body}}</div>
+  <div class="panel-footer">
+    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+    <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+    <button class="btn btn-info" (click)="visibleComment()">View comments</button>
+  </div>
+</div>
+<div class="row" *ngIf="visibleComments">
+  <div class="col-xs-8">
+    <input
+      placeholder="Search..."
+      type="text"
+      id="search"
+      class="form-control"
+      name="search"
+      [(ngModel)]="term_comments">
+  </div>
+  <div class="col-xs-4">
+    <button class="btn btn-primary" (click)="onDeleteComments()">Delete</button>
+  </div>
+</div>
+<br>
+<div class="col-xs-12" *ngIf="visibleComments">
+  <label class="container">Select all
+    <input type="checkbox" [(ngModel)]="checkSelectAll" (click)="selectAll()" >
+    <span class="checkmark"></span>
+  </label>
+  <app-edit-comment class="panel-group"
+    *ngFor="let commentEl of commentsByPostId |
+    search:term_comments |
+    paginate: { itemsPerPage: 6, currentPage: n, id:'n'};"
+    [comment]="commentEl"
+    #comments>
+  </app-edit-comment>
+  <br>
+  <pagination-controls (pageChange)="p = $event" id="n"></pagination-controls>
+</div>
+
+
+

@@ -1,0 +1,58 @@
+<form (ngSubmit)="onAddPost(f)" #f="ngForm">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text"
+             class="form-control"
+             placeholder="title"
+             autofocus
+             required
+             minlength="4"
+             id="title"
+             name="title"
+             ngModel
+             #title="ngModel"
+             [ngModel]="editMode ? postEl.title : ''">
+      <div *ngIf="!title.valid && title.touched">
+            <span class="help-block"
+                  *ngIf="title.hasError('required')"
+            >Title is required!</span>
+        <span class="help-block"
+              *ngIf="title.hasError('minlength')"
+        >Title must be at least 4 characters long!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="post">post</label>
+      <textarea name="post"
+                id="post"
+                class="form-control"
+                placeholder="post"
+                required
+                minlength="10"
+                rows="10"
+                ngModel
+                #post="ngModel"
+                [ngModel]="editMode ? postEl.body : ''"></textarea>
+      <div *ngIf="!post.valid && post.touched">
+            <span class="help-block"
+                  *ngIf="post.hasError('required')"
+            >Post is required!</span>
+        <span class="help-block"
+              *ngIf="post.hasError('minlength')"
+        >Post must be at least 10 characters long!</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <button type="submit"
+            class="btn btn-success"
+            [disabled]="!f.valid"
+    >{{editMode ? 'Update': 'Save'}}</button>
+    <button type="button" class="btn btn-info" (click)="onReset()">Reset</button>
+  </div>
+</form>
+
+
+
+

@@ -8,6 +8,12 @@ import {CommentsService} from '../posts/comments/comments.service';
 import {UsersService} from '../users/users.service';
 import {AlbumsService} from '../albums/albums.service';
 import {PhotosService} from '../albums/photos-list/photos.service';
+import {AuthService} from '../auth/auth.service';
+import {CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {EditPostsService} from '../edit/edit-posts/edit-posts.service';
+import {EditService} from '../edit/edit.service';
+import {AuthGuardService} from '../auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +21,9 @@ import {PhotosService} from '../albums/photos-list/photos.service';
     HomeComponent
   ],
   imports: [
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule,
+    CommonModule
   ],
   exports: [
     AppRoutingModule,
@@ -27,7 +35,11 @@ import {PhotosService} from '../albums/photos-list/photos.service';
     CommentsService,
     UsersService,
     AlbumsService,
-    PhotosService
+    PhotosService,
+    AuthService,
+    EditService,
+    EditPostsService,
+    AuthGuardService
   ]
 })
 export class CoreModule {}

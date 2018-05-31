@@ -20,11 +20,17 @@ export class AddCommentComponent implements OnInit {
 
   onAddComment(form: NgForm) {
     const value = form.value;
-    console.log(
-      this.dataService.addComment(
-        new Comment(this.postId, value.title, value.email, value.comment)
-      )
-    );
+    const comment = new Comment(this.postId, value.title, value.email, value.comment);
+    this.dataService.addComment(comment)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.commentService.addCommentHideForm.next(false);
+        },
+        (err) => {
+          console.log(err.error.message);
+        }
+      );
     form.onReset();
     this.commentService.addCommentHideForm.next(false);
   }

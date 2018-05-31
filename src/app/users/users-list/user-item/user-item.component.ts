@@ -8,10 +8,11 @@ import {User} from '../../user-model/user.model';
 })
 export class UserItemComponent implements OnInit {
   @Input() user: User;
-  @Input() index: number;
+  id: number;
   constructor() { }
 
   ngOnInit() {
+    this.id = this.user.id;
   }
 
 }

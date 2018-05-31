@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../user-model/user.model';
 import {UsersService} from '../users.service';
 import {DataAccessService} from '../../share/data-access.service';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-users-list',
@@ -14,9 +13,7 @@ export class UsersListComponent implements OnInit {
   term: string;
   p = 1;
   constructor(public dataService: DataAccessService,
-              private usersService: UsersService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+              private usersService: UsersService) { }
 
   ngOnInit() {
     this.dataService.getUsers();
@@ -30,9 +27,4 @@ export class UsersListComponent implements OnInit {
         }
       );
   }
-
-  onNewUser() {
-    this.router.navigate(['new'], {relativeTo: this.route});
-  }
-
 }

@@ -14,8 +14,13 @@ export class AlbumsService {
     this.albumsChange.next(this.albums);
   }
 
-  getAlbumByIndex(index: number) {
-    return this.albums[index];
+  getAlbumByById(id: number) {
+    for (const album of this.albums) {
+      if (album.id === id) {
+        return album;
+      }
+    }
+    return null;
   }
 
 }

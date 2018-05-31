@@ -8,10 +8,11 @@ import {Album} from '../../album.model';
 })
 export class AlbumItemComponent implements OnInit {
   @Input() album: Album;
-  @Input() index: number;
+  index: number;
   constructor() { }
 
   ngOnInit() {
+    this.index = this.album.id;
   }
 
 }

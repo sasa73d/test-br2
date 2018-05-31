@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-xs-10">
+    <input
+      placeholder="Search..."
+      type="text"
+      id="search"
+      class="form-control"
+      name="search"
+      [(ngModel)]="term">
+  </div>
+  <div class="col-xs-2">
+    <button class="btn btn-primary" (click)="onNewPost()">New</button>
+  </div>
+  <hr>
+  <div class="col-xs-12">
+    <app-edit-post-item
+      class="panel-group"
+      *ngFor="let postEl of postsByUserId
+          | search: term
+          | paginate: { itemsPerPage: 6, currentPage: p, id: 'p'};"
+      [post]="postEl"
+    ></app-edit-post-item>
+    <br>
+    <pagination-controls (pageChange)="p = $event" id="p"></pagination-controls>
+  </div>
+</div>
