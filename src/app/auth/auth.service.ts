@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import * as jwt_decode from 'jwt-decode';
 import {ActivatedRouteSnapshot} from '@angular/router';
@@ -13,20 +13,13 @@ export class AuthService {
   error: object;
   constructor(private http: HttpClient) { }
 
-
   attemptAuth(username: string, password: string) {
     const credentials = {username: username, password: password};
     this.http.post(this.TOKEN_URL, credentials, {responseType: 'text'})
       .subscribe(
         (token: string) => {
-          this.token = token;
-          this.decodeToken = this.getDecodedAccessToken(this.token);
-          this.username = this.decodeToken['sub'];
-          for ( const obj of this.decodeToken['scopes'] ) {
-            if (obj['authority'] === 'ROLE_ADMIN') {
-              this.authAdmin = true;
-            }
-          }
+          localStorage.setItem('authToken', token);
+          this.setToken();
           this.error = null;
         },
         (error) => {
@@ -35,12 +28,30 @@ export class AuthService {
       );
   }
 
+  setToken() {
+    if (localStorage.getItem('authToken')) {
+      this.token = localStorage.getItem('authToken');
+      this.decodeToken = this.getDecodedAccessToken(this.token);
+      this.username = this.decodeToken['sub'];
+      for (const obj of this.decodeToken['scopes']) {
+        if (obj['authority'] === 'ROLE_ADMIN') {
+          this.authAdmin = true;
+        }
+      }
+    }
+  }
+
+  logOut() {
+    this.token = null;
+    localStorage.removeItem('authToken');
+    this.authAdmin = false;
+  }
+
   checkAdminAuth() {
     return this.authAdmin;
   }
 
   isAuthenticate(route: ActivatedRouteSnapshot) {
-    // console.log(this.decodeToken['scopes'].find(x => x['authority'] === 'TEST'));
     const promise = new Promise((resolve, reject) => {
         if (this.token) {
           if (route.url.toString() === 'edit' &&

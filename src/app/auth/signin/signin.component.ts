@@ -25,7 +25,7 @@ export class SigninComponent implements OnInit {
       if ( this.authService.error === null) {
         this.router.navigate(['']);
       }
-    }, 800);
+    }, 1000);
   }
 
   getErrorMessage() {

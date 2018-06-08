@@ -43,7 +43,7 @@ export class DataAccessService {
               private editService: EditService) {}
 
   // access and manage data for posts
-  public getPosts() {
+  getPosts() {
     this.http.get<Post[]>(this.POSTS_URL)
       .subscribe(
         (data: Post[]) => {
@@ -56,7 +56,7 @@ export class DataAccessService {
   }
 
   // access and manage data for posts edit
-  public getPostsByUserId(userId) {
+  getPostsByUserId(userId) {
     this.http.get<Post[]>(this.POSTS_URL, {
       params: new HttpParams().set('userId', userId)})
       .subscribe(
@@ -69,17 +69,17 @@ export class DataAccessService {
       );
   }
 
-  public addPost(post: Post) {
+  addPost(post: Post) {
     return this.http.post<Post>( this.POSTS_EDIT_URL, post,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)});
   }
 
-  public editPost(post: Post) {
+  editPost(post: Post) {
     return this.http.put<Post>( `${this.POSTS_EDIT_URL}/${post.id}`, post,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)});
   }
 
-  public deletePost(post: Post) {
+  deletePost(post: Post) {
     return this.http.delete<Post>( `${this.POSTS_EDIT_URL}/${post.id}`,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)});
   }
@@ -90,17 +90,17 @@ export class DataAccessService {
       params: new HttpParams().set('postId', postId)});
   }
 
-  public addComment(comment: Comment): Observable<Comment> {
+  addComment(comment: Comment): Observable<Comment> {
     return this.http.post<Comment>(this.COMMENT_URL, comment);
   }
 
-  public deleteComment(commentId) {
+  deleteComment(commentId) {
     return this.http.delete<Comment>( `${this.COMMENT_EDIT_URL}/${commentId}`,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)});
   }
 
   // access and manage from comment edit
-  public getCommentsByPostIdEdit(postId) {
+  getCommentsByPostIdEdit(postId) {
     return this.http.get<Comment[]>(this.COMMENT_URL, {
       params: new HttpParams().set('postId', postId)})
       .subscribe(
@@ -114,7 +114,7 @@ export class DataAccessService {
   }
 
   // access and manage data for users
-  public getUsers() {
+  getUsers() {
     this.http.get<User[]>(this.USERS_URL,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)})
       .subscribe(
@@ -127,23 +127,23 @@ export class DataAccessService {
       );
   }
 
-  public addUser(user: User) {
+  addUser(user: User) {
     return this.http.post<User>(this.ADD_USERS_URL , user);
   }
 
-  public editUser(user: User) {
+  editUser(user: User) {
     return this.http.put<User>(`${this.USERS_URL}/${user.id}`, user,
       {headers: new HttpHeaders({ 'Content-Type': 'application/json' }).set('Authorization', 'Bearer ' + this.authService.token)});
   }
 
-  public deleteUser(user: User) {
+  deleteUser(user: User) {
     return this.http.delete(`${this.USERS_URL}/${user.id}`,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token)});
   }
 
   // access and manage data for edit_user
 
-  public getUserByUsername(username: string) {
+  getUserByUsername(username: string) {
     return this.http.get<User>(this.USER_URL,
       {headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.authService.token),
       params: new HttpParams().set('username', username)})
@@ -158,7 +158,7 @@ export class DataAccessService {
   }
 
   // access and manage data for albums
-  public getAlbums() {
+  getAlbums() {
     this.http.get<Album[]>(this.ALBUMS_URL)
       .subscribe(
         (data) => {

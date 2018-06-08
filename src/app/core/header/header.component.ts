@@ -28,8 +28,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    this.authService.token = null;
-    this.authService.authAdmin = false;
+    this.authService.logOut();
     this.router.navigate(['']);
   }
 
